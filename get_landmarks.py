@@ -16,7 +16,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
-path = '/Users/ivyhe/Desktop/pointing/data' # change file path to image path
+path = '/Users/kylelee/Desktop/pointing/data' # change file path to image path
 # fnum = 9 # can change this to desired file number (just remember to change it in the other files too)
 
 # human measurement defined base on mediapipe pose landmark
