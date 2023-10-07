@@ -1,14 +1,16 @@
 import os
 from tkinter import RIGHT
 from turtle import left, right
+from xml.etree.ElementInclude import include
 import cv2
 import math
 import pickle
 import numpy as np
 import mediapipe as mp
-from tqdm import tqdm
-import open3d as o3d
+# from tqdm import tqdm
+# import open3d as o3d
 import json
+from add_intersection import *
 
 # this script maps skeleton tracking to our collected image data, and save the  
 # world landmark coordinates in m to json
@@ -16,7 +18,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
 
-path = '/Users/kylelee/Desktop/pointing/data' # change file path to image path
+path = '/Users/kylelee/Desktop/Gesture/gesture/data' # change file path to image path
 # fnum = 9 # can change this to desired file number (just remember to change it in the other files too)
 
 # human measurement defined base on mediapipe pose landmark
@@ -75,9 +77,8 @@ with mp_pose.Pose(
     static_image_mode=True,
     enable_segmentation=True,
     min_detection_confidence=0.5) as pose:
-  for file in os.listdir(path):
+  for (i, file) in enumerate(os.listdir(path)):
     if '.png'in file:
-        print(file)
         image = cv2.imread(path+"/"+file)
         h, w, _ = image.shape
         # Convert the BGR image to RGB before processing.
@@ -112,34 +113,47 @@ with mp_pose.Pose(
         image_data["world_landmark_right_shoulder"] = right_s
         image_data["world_landmark_left_elbow"] = left_elb
         image_data["world_landmark_right_elbow"] = right_elb
+
+        image_data["left_eye_left_wrist_intersection"] = left_eye_left_wrist[i]
+        image_data["right_eye_right_wrist_intersection"] = right_eye_right_wrist[i]
+        image_data["mid_eye_left_wrist_intersection"] = mid_eye_left_wrist[i]
+        image_data["mid_eye_right_wrist_intersection"] = mid_eye_right_wrist[i]
+        image_data["nose_left_wrist_intersection"] = nose_left_wrist[i]
+        image_data["nose_right_wrist_intersection"] = nose_right_wrist[i]
+        image_data["left_shoulder_left_wrist_intersection"] = left_shoulder_left_wrist[i]
+        image_data["right_shoulder_right_wrist_intersection"] = right_shoulder_right_wrist[i]
+        image_data["left_elbow_left_wrist_intersection"] = left_elbow_left_wrist[i]
+        image_data["right_elbow_right_wrist_intersection"] = right_elbow_right_wrist[i]
+
         image_data["ground_offset"] = ground_offset
         image_data["target"] = int(file[-5])
+        
         data["image"].append(image_data)
         
     else:
         continue
 
-    annotated_image = image.copy()
-    # Draw segmentation on the image.
-    # To improve segmentation around boundaries, consider applying a joint
-    # bilateral filter to "results.segmentation_mask" with "image".
-    if BOUNDARY_SEGMENTATION: 
-        condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1
-        bg_image = np.zeros(image.shape, dtype=np.uint8)
-        bg_image[:] = BG_COLOR
-        annotated_image = np.where(condition, annotated_image, bg_image)
+    # annotated_image = image.copy()
+    # # Draw segmentation on the image.
+    # # To improve segmentation around boundaries, consider applying a joint
+    # # bilateral filter to "results.segmentation_mask" with "image".
+    # if BOUNDARY_SEGMENTATION: 
+    #     condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1
+    #     bg_image = np.zeros(image.shape, dtype=np.uint8)
+    #     bg_image[:] = BG_COLOR
+    #     annotated_image = np.where(condition, annotated_image, bg_image)
     
-    # Draw pose landmarks on the image.
-    mp_drawing.draw_landmarks(
-        annotated_image,
-        results.pose_landmarks,
-        mp_pose.POSE_CONNECTIONS,
-        landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+    # # Draw pose landmarks on the image.
+    # mp_drawing.draw_landmarks(
+    #     annotated_image,
+    #     results.pose_landmarks,
+    #     mp_pose.POSE_CONNECTIONS,
+    #     landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
     
-    cv2.imshow('annotated', annotated_image)
-    cv2.waitKey(0)
-    if BOUNDARY_SEGMENTATION: 
-        cv2.imwrite(path + '/seg/annotated_' + file + '.png', annotated_image)
+    # cv2.imshow('annotated', annotated_image)
+    # cv2.waitKey(0)
+    # if BOUNDARY_SEGMENTATION: 
+    #     cv2.imwrite(path + '/seg/annotated_' + file + '.png', annotated_image)
 
 # Write the data to a JSON file (create the file if it doesn't exist)
 with open(path+'.json', 'w') as json_file:

@@ -52,6 +52,56 @@
                 -0.23036503791809082,
                 0.16967236995697021
             ],
+            "left_eye_left_wrist_intersection": [
+                0.11088889029935232,
+                0.0,
+                -0.09923013828669074
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.06446027946970048,
+                1.3877787807814457e-17,
+                -0.17072148413404953
+            ],
+            "mid_eye_left_wrist_intersection": [
+                0.12750080111938736,
+                0.0,
+                -0.10780166001843901
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.06446027946970048,
+                1.3877787807814457e-17,
+                -0.17072148413404953
+            ],
+            "nose_left_wrist_intersection": [
+                0.14405603426551145,
+                1.3877787807814457e-17,
+                -0.11634393683556737
+            ],
+            "nose_right_wrist_intersection": [
+                0.07981414395706912,
+                0.0,
+                -0.17801780816165158
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.7160549241198466,
+                -5.551115123125783e-17,
+                0.07694312407602195
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                0.05054701099717686,
+                0.0,
+                0.12619676643723418
+            ],
+            "left_elbow_left_wrist_intersection": [
+                1.6101056969111414,
+                0.0,
+                0.2018232510383108
+            ],
+            "right_elbow_right_wrist_intersection": [
+                0.15914634633008234,
+                0.0,
+                0.3962739265854245
+            ],
             "ground_offset": 0.7933778166770935,
             "target": 4
         },
@@ -106,6 +156,56 @@
                 -0.14765669405460358,
                 -0.25373557209968567,
                 0.06256543844938278
+            ],
+            "left_eye_left_wrist_intersection": [
+                -0.026941004521264356,
+                0.0,
+                -0.17195464942905808
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.04677921153401639,
+                0.0,
+                -0.20004749135472527
+            ],
+            "mid_eye_left_wrist_intersection": [
+                -0.00835560405451673,
+                0.0,
+                -0.17386098902816613
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.04677921153401639,
+                0.0,
+                -0.20004749135472527
+            ],
+            "nose_left_wrist_intersection": [
+                0.010154708569917847,
+                0.0,
+                -0.17575962672558795
+            ],
+            "nose_right_wrist_intersection": [
+                0.06397902481870861,
+                0.0,
+                -0.2014384482778893
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.09585677084735604,
+                0.0,
+                0.09477401388323192
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                -0.07862953020098473,
+                -5.551115123125783e-17,
+                0.023920425527279344
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.0694755641919498,
+                5.551115123125783e-17,
+                0.38110639443024924
+            ],
+            "right_elbow_right_wrist_intersection": [
+                -0.051721199769882806,
+                0.0,
+                0.26651826279853374
             ],
             "ground_offset": 0.7820501327514648,
             "target": 1
@@ -162,6 +262,56 @@
                 -0.3289863169193268,
                 -0.007898312993347645
             ],
+            "left_eye_left_wrist_intersection": [
+                -0.006570590896789828,
+                0.0,
+                -0.24624281158098124
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.14089383017008153,
+                0.0,
+                -0.2712746762542399
+            ],
+            "mid_eye_left_wrist_intersection": [
+                0.012624004598231577,
+                1.3877787807814457e-17,
+                -0.24749540664462388
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.14089383017008153,
+                0.0,
+                -0.2712746762542399
+            ],
+            "nose_left_wrist_intersection": [
+                0.031756907438839785,
+                0.0,
+                -0.24874397578782567
+            ],
+            "nose_right_wrist_intersection": [
+                0.15917726873850702,
+                0.0,
+                -0.27227095296193043
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.20767081342890942,
+                0.0,
+                -0.03833011420594294
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                0.1450809138692109,
+                0.0,
+                -0.039376209275129276
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.2191725584916615,
+                0.0,
+                0.15278415021286662
+            ],
+            "right_elbow_right_wrist_intersection": [
+                0.19983783156332746,
+                5.551115123125783e-17,
+                0.21246377084806142
+            ],
             "ground_offset": 0.7986371517181396,
             "target": 4
         },
@@ -216,6 +366,56 @@
                 -0.1517181247472763,
                 -0.234244704246521,
                 -0.036368824541568756
+            ],
+            "left_eye_left_wrist_intersection": [
+                -0.025700461868995,
+                -2.7755575615628914e-17,
+                -0.37371324913228315
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.07120296037458002,
+                0.0,
+                -0.38537586532632856
+            ],
+            "mid_eye_left_wrist_intersection": [
+                -0.005065536347162929,
+                2.7755575615628914e-17,
+                -0.3746191835002959
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.07120296037458002,
+                0.0,
+                -0.38537586532632856
+            ],
+            "nose_left_wrist_intersection": [
+                0.015456687046224552,
+                0.0,
+                -0.3755201699109523
+            ],
+            "nose_right_wrist_intersection": [
+                0.0907278015966218,
+                0.0,
+                -0.3861315182117605
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.2107180813622814,
+                -5.551115123125783e-17,
+                -0.1338439707658235
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                -0.09432617786015145,
+                0.0,
+                -0.11052398019954973
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.15358163602009947,
+                1.1102230246251565e-16,
+                0.04402259331706897
+            ],
+            "right_elbow_right_wrist_intersection": [
+                -0.09433216562788677,
+                0.0,
+                0.14064163916324687
             ],
             "ground_offset": 0.7875721454620361,
             "target": 2
@@ -272,6 +472,56 @@
                 -0.3123655915260315,
                 0.13242022693157196
             ],
+            "left_eye_left_wrist_intersection": [
+                0.019421463828317533,
+                0.0,
+                -0.08264056768943259
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.055464408440161685,
+                0.0,
+                -0.21650926548636895
+            ],
+            "mid_eye_left_wrist_intersection": [
+                0.030262271443262427,
+                0.0,
+                -0.09831048844183271
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.055464408440161685,
+                0.0,
+                -0.21650926548636895
+            ],
+            "nose_left_wrist_intersection": [
+                0.041055677858268254,
+                0.0,
+                -0.11391189280015966
+            ],
+            "nose_right_wrist_intersection": [
+                0.0654032657378068,
+                2.7755575615628914e-17,
+                -0.23023421126719126
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.6217275401143048,
+                0.0,
+                0.04522283468954741
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                0.2238597709985719,
+                0.0,
+                0.08828379435923149
+            ],
+            "left_elbow_left_wrist_intersection": [
+                1.0183328079416625,
+                0.0,
+                0.23268071631041853
+            ],
+            "right_elbow_right_wrist_intersection": [
+                0.25836388779895586,
+                0.0,
+                0.37235898476928386
+            ],
             "ground_offset": 0.8149911761283875,
             "target": 4
         },
@@ -326,6 +576,56 @@
                 -0.1265558898448944,
                 -0.25395917892456055,
                 0.10454551130533218
+            ],
+            "left_eye_left_wrist_intersection": [
+                -0.06925658770517781,
+                0.0,
+                -0.1580522384093307
+            ],
+            "right_eye_right_wrist_intersection": [
+                -0.036628348040262354,
+                1.3877787807814457e-17,
+                -0.1929341869228172
+            ],
+            "mid_eye_left_wrist_intersection": [
+                -0.054806282466661894,
+                0.0,
+                -0.16633754305759396
+            ],
+            "mid_eye_right_wrist_intersection": [
+                -0.036628348040262354,
+                1.3877787807814457e-17,
+                -0.1929341869228172
+            ],
+            "nose_left_wrist_intersection": [
+                -0.0404813595801634,
+                0.0,
+                -0.17455095780686666
+            ],
+            "nose_right_wrist_intersection": [
+                -0.023010303349439827,
+                0.0,
+                -0.2002403444684421
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.2627381451872546,
+                0.0,
+                -0.08044655062536905
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                -0.071622830618203,
+                0.0,
+                0.07294594524093287
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.5903929984816811,
+                5.551115123125783e-17,
+                -0.024954460492767228
+            ],
+            "right_elbow_right_wrist_intersection": [
+                0.02278801168512201,
+                0.0,
+                0.348148524991478
             ],
             "ground_offset": 0.7613161206245422,
             "target": 3
@@ -382,6 +682,56 @@
                 -0.23669441044330597,
                 0.03438958153128624
             ],
+            "left_eye_left_wrist_intersection": [
+                0.00536839750043196,
+                0.0,
+                -0.18915848358737175
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.0612102556707515,
+                0.0,
+                -0.20873642185738273
+            ],
+            "mid_eye_left_wrist_intersection": [
+                0.023610615810333684,
+                0.0,
+                -0.19061591170581274
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.0612102556707515,
+                0.0,
+                -0.20873642185738273
+            ],
+            "nose_left_wrist_intersection": [
+                0.04174602550110137,
+                0.0,
+                -0.19206480654819197
+            ],
+            "nose_right_wrist_intersection": [
+                0.07819327015520275,
+                0.0,
+                -0.2096697891095236
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.23130083929948908,
+                5.551115123125783e-17,
+                0.046075478847625195
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                -0.07234533695916046,
+                -5.551115123125783e-17,
+                0.012424641347976492
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.19209522653885067,
+                0.0,
+                0.3117134743074562
+            ],
+            "right_elbow_right_wrist_intersection": [
+                -0.0920285911035055,
+                0.0,
+                0.2512461162069978
+            ],
             "ground_offset": 0.7926592230796814,
             "target": 2
         },
@@ -436,6 +786,56 @@
                 -0.1833241581916809,
                 -0.22613410651683807,
                 -0.015424946323037148
+            ],
+            "left_eye_left_wrist_intersection": [
+                -0.0050257702687555375,
+                1.3877787807814457e-17,
+                -0.2335297445068292
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.11005341255963581,
+                0.0,
+                -0.2635170677128744
+            ],
+            "mid_eye_left_wrist_intersection": [
+                0.01570159861204016,
+                0.0,
+                -0.23106175236330762
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.11005341255963581,
+                0.0,
+                -0.2635170677128744
+            ],
+            "nose_left_wrist_intersection": [
+                0.03632868777681531,
+                0.0,
+                -0.22860570044976486
+            ],
+            "nose_right_wrist_intersection": [
+                0.12882956857874003,
+                0.0,
+                -0.2606976969566401
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.14085960164758862,
+                0.0,
+                0.09939628614108886
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                -0.09583786284256574,
+                0.0,
+                -0.034891874048646736
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.14233703545700604,
+                -1.1102230246251565e-16,
+                0.43040733888606186
+            ],
+            "right_elbow_right_wrist_intersection": [
+                -0.12061366592831453,
+                0.0,
+                0.19860655965943233
             ],
             "ground_offset": 0.7741062641143799,
             "target": 1
@@ -492,8 +892,59 @@
                 -0.2252284288406372,
                 0.0526043139398098
             ],
+            "left_eye_left_wrist_intersection": [
+                0.020243777567497404,
+                0.0,
+                -0.20760713015217333
+            ],
+            "right_eye_right_wrist_intersection": [
+                0.04322635842329123,
+                0.0,
+                -0.23109773096660965
+            ],
+            "mid_eye_left_wrist_intersection": [
+                0.037743138329507264,
+                0.0,
+                -0.21103421995346958
+            ],
+            "mid_eye_right_wrist_intersection": [
+                0.04322635842329123,
+                0.0,
+                -0.23109773096660965
+            ],
+            "nose_left_wrist_intersection": [
+                0.05510513433784671,
+                1.3877787807814457e-17,
+                -0.21443440812374268
+            ],
+            "nose_right_wrist_intersection": [
+                0.0601312304498722,
+                0.0,
+                -0.23384703631203982
+            ],
+            "left_shoulder_left_wrist_intersection": [
+                0.36271476291067895,
+                0.0,
+                -0.0475152904767838
+            ],
+            "right_shoulder_right_wrist_intersection": [
+                -0.05142140539950812,
+                0.0,
+                0.03454566421108808
+            ],
+            "left_elbow_left_wrist_intersection": [
+                0.5607956657830707,
+                0.0,
+                0.06379248994723613
+            ],
+            "right_elbow_right_wrist_intersection": [
+                -0.00701216559439502,
+                0.0,
+                0.2880154712762129
+            ],
             "ground_offset": 0.7739894986152649,
             "target": 3
         }
-    ]
+    ],
+    "world": []
 }
