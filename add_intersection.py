@@ -1,8 +1,10 @@
 import pandas as pd
 import math
+import os
+import sys
 import numpy as np
-
-df = pd.read_json('data.json')
+script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+df = pd.read_json(script_dir+'/data.json')
 names = []
 nose = []
 left_eye = []
@@ -34,7 +36,6 @@ for entry in df["image"]:
 
 df = pd.DataFrame(list(zip(names, nose, left_eye, right_eye, mid_eye, left_wrist, right_wrist, left_shoulder, right_shoulder, left_elbow, right_elbow, offsets, targets)),
                columns =['Names', 'Nose', 'Left eye', 'Right eye', 'Mid eye', 'Left wrist', 'Right wrist', 'Left shoulder', 'Right shoulder', 'Left elbow', 'Right elbow', 'Offsets', 'Targets'])
-
 # left eye left wrist
 # right eye right wrist
 # mid eye left wrist
