@@ -221,6 +221,8 @@ for i in range(len(ld["image"])):
 
     # Show the plot
     plt.subplots_adjust(bottom = 0.2)
+    fig1.savefig(script_dir+'/plot/%s_3D.png'%img_name)
+    fig2.savefig(script_dir+'/plot/%s_target_%i.png'%(img_name,target))
     plt.legend()
     plt.show()
 
