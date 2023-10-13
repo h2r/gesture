@@ -61,6 +61,8 @@ for entry in data["image"]:
 df = pd.DataFrame(list(zip(names, nose, left_eye, right_eye, mid_eye, left_wrist, right_wrist, left_shoulder, right_shoulder, left_elbow, right_elbow, offsets)),
                columns =['Names', 'Nose', 'Left eye', 'Right eye', 'Mid eye', 'Left wrist', 'Right wrist', 'Left shoulder', 'Right shoulder', 'Left elbow', 'Right elbow', 'Offsets'])
 
+THRESHOLD = math.pi/18
+
 def plane_line_intersection(la, lb, y_offset):
   if la and lb:
     # the line passing through la and lb is la + lab*t, where t is a scalar parameter
@@ -124,6 +126,8 @@ for i, row in df.iterrows():
     point_a1 = (df['Left eye'][i][0], df['Left eye'][i][1] - df['Offsets'][i], df['Left eye'][i][2])
     point_b1 = (df['Left wrist'][i][0], df['Left wrist'][i][1] - df['Offsets'][i], df['Left wrist'][i][2])
     intersect_point_1 = plane_line_intersection(point_a1, point_b1, 0)
+    angle1 = intersect_point_1[0]
+
     vector_1 = calculate_vector(point_a1, point_b1)
 
     # right eye right wrist

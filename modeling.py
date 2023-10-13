@@ -19,6 +19,7 @@ targets = [t1, t2, t3, t4]
 # open and import data from json
 ld = pd.read_json(script_dir+"/landmark_data.json")
 vaid = pd.read_json(script_dir+"/vector_and_intersection_data.json")
+
 # pose connection pair
 pose_connection = [(0, 1), (1, 2), (2, 3), (3, 7), (0, 4), (4, 5),
                               (5, 6), (6, 8), (9, 10), (11, 12), (11, 13),
@@ -68,6 +69,15 @@ vector_list = ["left_eye",
 
 output = {"image" : []}
 for i in range(len(ld["image"])):
+
+    # string var that indicates whether or not the left, right, or both pointing arm is used
+    if 'right' in ld["image"][i]['name'][0]:
+        point_arm = 'right'
+    elif 'left' in ld["image"][i]['name'][0]:
+        point_arm = 'left'
+    else:
+        point_arm = 'both'
+
     image_output = {"name":[],
                     "target":[]}
     img = ld["image"][i]
@@ -80,11 +90,21 @@ for i in range(len(ld["image"])):
     # Get body coornidates for all joints
     lmk = pd.DataFrame(img["landmark_3D"])
     img_name = img["name"][0]
-    target = int(img_name[-5])
+    target = int(img_name[0])
     image_output['name'].append(img_name)
     image_output['target'].append(target)
     ground = pd.DataFrame(vaid["image"][i]["ground"])
     vector = pd.DataFrame(vaid["image"][i]["vector"])
+    
+    bad_cols = []
+    for column in ground.columns:
+        if point_arm not in column:
+            bad_cols.append(column)
+    ground = ground.drop(columns = bad_cols)
+    vector = vector.drop(columns = bad_cols)
+      
+    print("ground", ground)
+    print("vector", vector)
     offset = vaid["image"][i]["offset"]
     # # plot joint coordinates, y, z flipped
     # for name in lmk['landmark_name']:
@@ -117,7 +137,7 @@ for i in range(len(ld["image"])):
               WHITE_COLOR, WHITE_COLOR, RED_COLOR, RED_COLOR]
     i_temp = 0
     for name in ground:
-
+        
         x = ground[name][0]
         y = ground[name][1]
         z = ground[name][2]
@@ -148,10 +168,10 @@ for i in range(len(ld["image"])):
     ax1.set_xlim(2, -2)  
     ax1.set_zlim( -1.8, 0.1)  
     ax1.set_ylim(-2, 2)  
-    # Make the ax1is planes solid gray
-    ax1.w_xaxis.pane.fill = True  # Disable filling the x-ax1is plane
-    ax1.w_yaxis.pane.fill = True  # Disable filling the y-ax1is plane
-    ax1.w_zaxis.pane.fill = True  # Disable filling the z-ax1is plane
+    # # Make the ax1is planes solid gray
+    # ax1.w_xaxis.pane.fill = True  # Disable filling the x-ax1is plane
+    # ax1.w_yaxis.pane.fill = True  # Disable filling the y-ax1is plane
+    # ax1.w_zaxis.pane.fill = True  # Disable filling the z-ax1is plane
 
     # Set the view to have y as vertical and z pointing out
     ax1.view_init(elev=-155, azim=85)
@@ -209,15 +229,16 @@ for i in range(len(ld["image"])):
     ax2.set_xlabel("X")
     ax2.set_ylabel("Y")
     categories = vector_list
-    # Create a bar graph
-    bar_width = 0.24
-    x = np.arange(len(categories))
-    ax3.bar(x - bar_width, x_values, bar_width, label='x_diff', color='blue')
-    ax3.bar(x, y_values, bar_width, label='y_diff', color='green')
-    ax3.bar(x + bar_width, dist_values, bar_width, label='Distance', color='red')
-    ax3.set_xticks(x, categories, rotation=90)
-    ax3.set_title('distance distribution of vectors to target%i'%target)
-    ax3.set_ylabel('distance to target[m]')
+ 
+    # # Create a bar graph
+    # bar_width = 0.24
+    # x = np.arange(len(categories))
+    # ax3.bar(x - bar_width, x_values, bar_width, label='x_diff', color='blue')
+    # ax3.bar(x, y_values, bar_width, label='y_diff', color='green')
+    # ax3.bar(x + bar_width, dist_values, bar_width, label='Distance', color='red')
+    # ax3.set_xticks(x, categories, rotation=90)
+    # ax3.set_title('distance distribution of vectors to target%i'%target)
+    # ax3.set_ylabel('distance to target[m]')
 
     # Show the plot
     plt.subplots_adjust(bottom = 0.2)
