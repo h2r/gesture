@@ -29,16 +29,16 @@ pose_connection = [(0, 1), (1, 2), (2, 3), (3, 7), (0, 4), (4, 5),
                               (24, 26), (25, 27), (26, 28), (27, 29), (28, 30),
                               (29, 31), (30, 32), (27, 31), (28, 32)]
 
-vector_connection = [
-                               (2, 15),  # left eye to left wrist
-                               (5, 16),  # right eye to right wrist
-                              (0,15), # nose to left wrist
-                              (0,16), # nose to right wrist
-                               (11, 15),  # left shoulder to left wrist
-                              (12, 16),  # right shoulder to right wrist
-                              (13, 15),  # left elbow to left wrist
-                              (14, 16), # right elbow to right wrist
-                              ]
+# vector_connection = [
+#                                (2, 15),  # left eye to left wrist       -> 0
+#                                (5, 16),  # right eye to right wrist     -> 1
+#                               (0,15), # nose to left wrist              -> 2
+#                               (0,16), # nose to right wrist             -> 3
+#                                (11, 15),  # left shoulder to left wrist -> 4
+#                               (12, 16),  # right shoulder to right wrist -> 5
+#                               (13, 15),  # left elbow to left wrist     -> 6
+#                               (14, 16), # right elbow to right wrist    -> 7
+#                               ]
 # Color assignment
 WHITE_COLOR = (224/255, 224/255, 224/255) # (shoulder to wrist)
 BLACK_COLOR = (0, 0, 0)
@@ -48,14 +48,18 @@ BLUE_COLOR = (255/255, 0, 0) #(eye to wrist)
 
 # left eye left wrist
 # right eye right wrist
+# mid eye left wrist
+# mid eye right wrist
 # nose to left wrist
 # nose to right wrist
 # left shoulder left wrist
 # right shoulder right wrist
 # left elbow left wrist
 # right elbow right wrist 
-color_list = [BLUE_COLOR, BLUE_COLOR,  GREEN_COLOR, GREEN_COLOR,
-              WHITE_COLOR, WHITE_COLOR, RED_COLOR, RED_COLOR]
+color_list = {"left_eye": BLUE_COLOR, "right_eye": BLUE_COLOR, "mid_eye_left": 'm', 
+"mid_eye-right": 'm', "nose_to-left": GREEN_COLOR, "nose_to-right": GREEN_COLOR, "left_shoulder": BLACK_COLOR, 
+"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR}
+
 vector_list = ["left_eye", 
            "right_eye",
            "mid_eye_left",
@@ -133,27 +137,67 @@ for i in range(len(ld["image"])):
 
 
     # plot ground intersection & vector
-    c_list = [BLUE_COLOR, BLUE_COLOR, 'm','m', GREEN_COLOR, GREEN_COLOR,
-              WHITE_COLOR, WHITE_COLOR, RED_COLOR, RED_COLOR]
-    i_temp = 0
+    c_list = {"left_eye": BLUE_COLOR, "right_eye": BLUE_COLOR, "mid_eye_left": 'm', 
+"mid_eye-right": 'm', "nose_to-left": GREEN_COLOR, "nose_to-right": GREEN_COLOR, "left_shoulder": BLACK_COLOR, 
+"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR}
+
     for name in ground:
-        
+        keywords = name.split("-") 
+        component = keywords[0] # left_eye, right_eye, mid_eye, nose_to, left_shoulder, right_shoulder, left_elbow, right_elbow
         x = ground[name][0]
         y = ground[name][1]
         z = ground[name][2]
-        c = c_list[i_temp]
-        v = vector_list[i_temp]
-        i_temp += 1
+        
+        # edge cases based on naming scheme
+        if component == 'mid_eye':
+            component = 'mid_eye_left'
+        elif component == 'nose_to':
+            component = 'nose_to-right'    
+            
+        c = c_list[component]
+        #v = vector_list[component]
         ax1.scatter(x, z, y, color = c, marker = 'o')
 
     # plot connection vector
-    for i in range(len(vector_connection)):
-        start= vector_connection[i][0]
-        end= vector_connection[i][1]
-        x = [lmk.iloc[start]["x"], lmk.iloc[end]["x"]]
-        y = [lmk.iloc[start]["y"]-offset, lmk.iloc[end]["y"]-offset] 
-        z = [lmk.iloc[start]["z"], lmk.iloc[end]["z"]]
-        c = color_list[i]
+    print(ground)
+    for name in ground:
+        keywords = name.split("-") 
+        component = keywords[0] # left_eye, right_eye, mid_eye, nose_to, left_shoulder, right_shoulder, left_elbow, right_elbow
+        x = ground[name][0]
+        y = ground[name][1]
+        z = ground[name][2]
+        
+        # edge cases based on naming scheme
+        if component == 'mid_eye':
+            component = 'mid_eye_left'
+        elif component == 'nose_to':
+            component = 'nose_to-right' 
+
+        # edge cases
+        if 'mid' in name:
+            left = lmk.loc[lmk['landmark_name'] == 'left_eye']
+            right = lmk.loc[lmk['landmark_name'] == 'right_eye']
+            startX = (left["x"].item() + right["x"].item())/2
+            startY = (left["y"].item() + right["y"].item())/2
+            startZ = (left["z"].item() + right["z"].item())/2
+            end = name.split("-")[1]
+            end = lmk.loc[lmk['landmark_name'] == end] 
+
+            x = [startX, end["x"].item()]
+            y = [startY-offset, end["y"].item()-offset] 
+            z = [startZ, end["z"].item()]
+        else:
+            if 'nose' in name:
+                start = lmk.loc[lmk['landmark_name'] == 'nose']
+            else:
+                start = lmk.loc[lmk['landmark_name'] == component] 
+            end = name.split("-")[1]
+            end = lmk.loc[lmk['landmark_name'] == end] 
+
+            x = [start["x"].item(), end["x"].item()]
+            y = [start["y"].item()-offset, end["y"].item()-offset] 
+            z = [start["z"].item(), end["z"].item()]
+        c = color_list[component]
         ax1.plot(x, z, y, color=c)
 
     # plot pointing vectors
@@ -201,20 +245,32 @@ for i in range(len(ld["image"])):
         
 
     # plot ground intersection & vector
-    c_list = [BLUE_COLOR, BLUE_COLOR, 'm','m', GREEN_COLOR, GREEN_COLOR,
-              WHITE_COLOR, WHITE_COLOR, RED_COLOR, RED_COLOR]
-    i_temp = 0
+    c_list = {"left_eye": BLUE_COLOR, "right_eye": BLUE_COLOR, "mid_eye_left": 'm', 
+"mid_eye-right": 'm', "nose_to-left": GREEN_COLOR, "nose_to-right": GREEN_COLOR, "left_shoulder": BLACK_COLOR, 
+"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR}
+
     x_values = []
     y_values = []
     dist_values = []
     for name in ground:
+        keywords = name.split("-") 
+        component = keywords[0] # left_eye, right_eye, mid_eye, nose_to, left_shoulder, right_shoulder, left_elbow, right_elbow
+        x = ground[name][0]
+        y = ground[name][1]
+        z = ground[name][2]
+        
+        # edge cases based on naming scheme
+        if component == 'mid_eye':
+            component = 'mid_eye_left'
+        elif component == 'nose_to':
+            component = 'nose_to-right' 
+
         tx = targets[target-1][0]
         ty = targets[target-1][2]
         x = ground[name][0]
         y = ground[name][2]
-        c = c_list[i_temp]
-        v = vector_list[i_temp]
-        i_temp += 1
+        c = c_list[component]
+        #v = vector_list[i_temp]
         ax2.scatter(x, y, color = c, marker = 'o')
         x_values.append(abs(tx-x))
         y_values.append(abs(ty-x))
