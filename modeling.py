@@ -186,6 +186,11 @@ for i in range(len(ld["image"])):
             x = [startX, end["x"].item()]
             y = [startY-offset, end["y"].item()-offset] 
             z = [startZ, end["z"].item()]
+
+            to_ground_x = [end["x"].item(), ground[name][0]]
+            to_ground_y = [end["y"].item()-offset, ground[name][1]]
+            to_ground_z = [end["z"].item(), ground[name][2]]
+            
         else:
             if 'nose' in name:
                 start = lmk.loc[lmk['landmark_name'] == 'nose']
@@ -197,8 +202,13 @@ for i in range(len(ld["image"])):
             x = [start["x"].item(), end["x"].item()]
             y = [start["y"].item()-offset, end["y"].item()-offset] 
             z = [start["z"].item(), end["z"].item()]
+
+            to_ground_x = [end["x"].item(), ground[name][0]]
+            to_ground_y = [end["y"].item()-offset, ground[name][1]]
+            to_ground_z = [end["z"].item(), ground[name][2]]
         c = color_list[component]
         ax1.plot(x, z, y, color=c)
+        ax1.plot(to_ground_x, to_ground_z, to_ground_y, color=c, linestyle='dashed')
 
     # plot pointing vectors
 
