@@ -8,16 +8,11 @@
                 4
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.407215861899084,
@@ -49,16 +44,11 @@
                 2
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.14037115618197799,
@@ -90,16 +80,11 @@
                 4
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.23215095090159488,
@@ -131,16 +116,11 @@
                 3
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.03254932602375199,
@@ -172,16 +152,11 @@
                 1
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.42173183823498694,
@@ -213,16 +188,11 @@
                 1
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.335683744953961,
@@ -254,16 +224,11 @@
                 3
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.292914425470449,
@@ -295,16 +260,11 @@
                 4
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.20370665894278495,
@@ -336,16 +296,11 @@
                 2
             ],
             "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
+                "eye",
+                "eyes ave.",
+                "nose",
+                "shoulder",
+                "elbow"
             ],
             "x_diff": [
                 0.146663577005003,

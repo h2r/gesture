@@ -60,16 +60,8 @@ color_list = {"left_eye": BLUE_COLOR, "right_eye": BLUE_COLOR, "mid_eye_left": '
 "mid_eye-right": 'm', "nose_to-left": GREEN_COLOR, "nose_to-right": GREEN_COLOR, "left_shoulder": BLACK_COLOR, 
 "right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR}
 
-vector_list = ["left_eye", 
-           "right_eye",
-           "mid_eye_left",
-           "mid_eye-right",
-           "nose_to-left",
-           "nose_to-right",
-           "left_shoulder", 
-           "right_shoulder", 
-           "left_elbow",
-           "right_elbow"]
+vector_list = ["eye", "eyes ave.", "nose","shoulder", "elbow"]
+  
 
 output = {"image" : []}
 for i in range(len(ld["image"])):
@@ -89,7 +81,7 @@ for i in range(len(ld["image"])):
     # fig = plt.figure()
     # ax1 = fig.add_subplot(111, projection='3d')
     fig1 = plt.figure(figsize=(7, 5))
-    fig2 = plt.figure(figsize=(10, 5))
+    # fig2 = plt.figure(figsize=(10, 5))
     ax1 = fig1.add_subplot(111, projection='3d')
     # Get body coornidates for all joints
     lmk = pd.DataFrame(img["landmark_3D"])
@@ -107,8 +99,8 @@ for i in range(len(ld["image"])):
     ground = ground.drop(columns = bad_cols)
     vector = vector.drop(columns = bad_cols)
       
-    print("ground", ground)
-    print("vector", vector)
+    # print("ground", ground)
+    # print("vector", vector)
     offset = vaid["image"][i]["offset"]
     # # plot joint coordinates, y, z flipped
     # for name in lmk['landmark_name']:
@@ -133,7 +125,7 @@ for i in range(len(ld["image"])):
             c = 'green'
         else:
             c = 'grey'
-        ax1.scatter(x, z, y, marker = 's', color = c, s = 100, label = str(i+1))
+        ax1.scatter(x, z, y, marker = 's', color = c, alpha = 0.5, s = 100)
 
 
     # plot ground intersection & vector
@@ -159,7 +151,7 @@ for i in range(len(ld["image"])):
         ax1.scatter(x, z, y, color = c, marker = 'o')
 
     # plot connection vector
-    print(ground)
+    # print(ground)
     for name in ground:
         keywords = name.split("-") 
         component = keywords[0] # left_eye, right_eye, mid_eye, nose_to, left_shoulder, right_shoulder, left_elbow, right_elbow
@@ -208,7 +200,8 @@ for i in range(len(ld["image"])):
             to_ground_z = [end["z"].item(), ground[name][2]]
         c = color_list[component]
         ax1.plot(x, z, y, color=c)
-        ax1.plot(to_ground_x, to_ground_z, to_ground_y, color=c, linestyle='dashed')
+        ax1.plot(to_ground_x, to_ground_z, to_ground_y, color=c, linestyle='dashed', label = component)
+        ax1.legend()
 
     # plot pointing vectors
 
@@ -228,30 +221,30 @@ for i in range(len(ld["image"])):
     # ax1.w_zaxis.pane.fill = True  # Disable filling the z-ax1is plane
 
     # Set the view to have y as vertical and z pointing out
-    ax1.view_init(elev=-155, azim=85)
+    ax1.view_init(elev=-165, azim=65)
 
     # Set plot title
     ax1.set_title('3D Plot of %s'%img_name)
 
     # 2D distance plotting
-    ax2 = fig2.add_subplot(121)
-    ax3 = fig2.add_subplot(122)
-    ax2.grid(True)
-    ax2.set_axisbelow(True)
-    ax3.grid(True)
-    ax3.set_axisbelow(True)
+    # ax2 = fig2.add_subplot(121)
+    # ax3 = fig2.add_subplot(122)
+    # ax2.grid(True)
+    # ax2.set_axisbelow(True)
+    # ax3.grid(True)
+    # ax3.set_axisbelow(True)
 
 
     # plot target position
-    for i in range(len(targets)):
-        t = targets[i]
-        x = t[0]
-        y = t[2]
-        if i+1 == target:
-            c = 'green'
-        else:
-            c = 'grey'
-        ax2.scatter(x, y, marker = 's', color = c, s = 100, label = str(i+1))
+    # for i in range(len(targets)):
+    #     t = targets[i]
+    #     x = t[0]
+    #     y = t[2]
+    #     if i+1 == target:
+    #         c = 'green'
+    #     else:
+    #         c = 'grey'
+    #     ax2.scatter(x, y, marker = 's', color = c, s = 100, label = str(i+1))
         
 
     # plot ground intersection & vector
@@ -281,19 +274,20 @@ for i in range(len(ld["image"])):
         y = ground[name][2]
         c = c_list[component]
         #v = vector_list[i_temp]
-        ax2.scatter(x, y, color = c, marker = 'o')
+        # ax2.scatter(x, y, color = c, marker = 'o')
         x_values.append(abs(tx-x))
         y_values.append(abs(ty-x))
         dist_values.append(np.sqrt((tx-x)**2 + (ty-y)**2))
+
     image_output['vector_name'] = vector_list
     image_output['x_diff'] = x_values
     image_output['y_diff'] = y_values
     image_output['dist'] = dist_values
-    
+    print(image_output)
         
-    ax2.set_title("x-y plane visualization")
-    ax2.set_xlabel("X")
-    ax2.set_ylabel("Y")
+    # ax2.set_title("x-y plane visualization")
+    # ax2.set_xlabel("X")
+    # ax2.set_ylabel("Y")
     categories = vector_list
  
     # categories = ["eye", "eye(ave.)", "nose", "shoulder", "elbow"]
@@ -307,8 +301,8 @@ for i in range(len(ld["image"])):
     # ax3.set_title('distance distribution of vectors to target%i'%target)
     # ax3.set_ylabel('distance to target[m]')
 
-    # Show the plot
-    plt.subplots_adjust(bottom = 0.2)
+    # # Show the plot
+    # plt.subplots_adjust(bottom = 0.2)
     fig1.savefig(script_dir+'/plot/%s_3D.png'%img_name[0:len(img_name)-4])
     # fig2.savefig(script_dir+'/plot/%s_target_%i.png'%(img_name[0:len(img_name)-4],target))
     plt.legend()
