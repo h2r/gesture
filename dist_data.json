@@ -43,29 +43,6 @@
         },
         {
             "name": [
-                "4_both_y_1.png"
-            ],
-            "target": [
-                4
-            ],
-            "vector_name": [
-                "left_eye",
-                "right_eye",
-                "mid_eye_left",
-                "mid_eye-right",
-                "nose_to-left",
-                "nose_to-right",
-                "left_shoulder",
-                "right_shoulder",
-                "left_elbow",
-                "right_elbow"
-            ],
-            "x_diff": [],
-            "y_diff": [],
-            "dist": []
-        },
-        {
-            "name": [
                 "2_left_n_1.png"
             ],
             "target": [
@@ -308,6 +285,47 @@
                 0.3145912923103306,
                 0.14737940045420295,
                 0.6112679351397184
+            ]
+        },
+        {
+            "name": [
+                "4_left_y_1.png"
+            ],
+            "target": [
+                4
+            ],
+            "vector_name": [
+                "left_eye",
+                "right_eye",
+                "mid_eye_left",
+                "mid_eye-right",
+                "nose_to-left",
+                "nose_to-right",
+                "left_shoulder",
+                "right_shoulder",
+                "left_elbow",
+                "right_elbow"
+            ],
+            "x_diff": [
+                0.20370665894278495,
+                0.22591651692718095,
+                0.17063524391047702,
+                0.991156121199696,
+                1.807260540473928
+            ],
+            "y_diff": [
+                0.28629334105721504,
+                0.26408348307281904,
+                0.31936475608952297,
+                1.481156121199696,
+                2.297260540473928
+            ],
+            "dist": [
+                0.30051381788121134,
+                0.3392146239800005,
+                0.3326536847214055,
+                1.1327498544259924,
+                2.034400073420452
             ]
         },
         {

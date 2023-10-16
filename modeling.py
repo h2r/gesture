@@ -296,6 +296,7 @@ for i in range(len(ld["image"])):
     ax2.set_ylabel("Y")
     categories = vector_list
  
+    # categories = ["eye", "eye(ave.)", "nose", "shoulder", "elbow"]
     # # Create a bar graph
     # bar_width = 0.24
     # x = np.arange(len(categories))
@@ -308,8 +309,8 @@ for i in range(len(ld["image"])):
 
     # Show the plot
     plt.subplots_adjust(bottom = 0.2)
-    fig1.savefig(script_dir+'/plot/%s_3D.png'%img_name)
-    fig2.savefig(script_dir+'/plot/%s_target_%i.png'%(img_name,target))
+    fig1.savefig(script_dir+'/plot/%s_3D.png'%img_name[0:len(img_name)-4])
+    # fig2.savefig(script_dir+'/plot/%s_target_%i.png'%(img_name[0:len(img_name)-4],target))
     plt.legend()
     plt.show()
 
