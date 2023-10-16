@@ -156,7 +156,7 @@ for i, row in df.iterrows():
 
     # nose to right wrist
     point_a6 = (df['Nose'][i][0], df['Nose'][i][1] - df['Offsets'][i], df['Nose'][i][2])
-    point_b6 = (df['Right wrist'][i][0], df['Right wrist'][i][1] + df['Offsets'][i], df['Right wrist'][i][2])
+    point_b6 = (df['Right wrist'][i][0], df['Right wrist'][i][1] - df['Offsets'][i], df['Right wrist'][i][2])
     intersect_point_6 = plane_line_intersection(point_a6, point_b6, 0)
     vector_6 = calculate_vector(point_a6, point_b6)
 
