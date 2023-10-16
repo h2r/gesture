@@ -10,12 +10,20 @@ import json
 # Get the directory of the currently running script
 script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 # Target 3D location, 1-4 from left to right
-t4 = [-1.05, 0, -.56]
-t3 = [-.39, 0, -.24]
-t1 = [1.05, 0, -.56]
-t2 = [.39, 0, -.24]
+t4 = [-1.05, 0, -1.02]
+t3 = [-.39, 0, -.72]
+t1 = [1.05, 0, -1.02]
+t2 = [.39, 0, -.72]
+
 targets = [t1, t2, t3, t4]
 
+old_targets = [[1.05, 0, -0.56], 
+               [.39, 0, -.24],
+               [-.39, 0, -.24],
+               [-1.05, 0, -0.56]]
+old_target_img = ["1_left_n_1", "1_left_y_1","2_left_n_1", "2_left_y_1", 
+                  "3_left_n_1", "3_left_y_1", "4_left_n_1",	"4_left_y_1",	
+                  "4_right_n_1"]
 # open and import data from json
 ld = pd.read_json(script_dir+"/landmark_data.json")
 vaid = pd.read_json(script_dir+"/vector_and_intersection_data.json")
@@ -86,6 +94,10 @@ for i in range(len(ld["image"])):
     # Get body coornidates for all joints
     lmk = pd.DataFrame(img["landmark_3D"])
     img_name = img["name"][0]
+    if img_name[0:len(img_name)-4] in old_target_img:
+        print(img_name)
+        targets = old_targets
+
     target = int(img_name[0])
     image_output['name'].append(img_name)
     image_output['target'].append(target)
