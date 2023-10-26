@@ -53,6 +53,7 @@ BLACK_COLOR = (0, 0, 0)
 RED_COLOR = (0, 0, 255/255) #(elbow to wrist)
 GREEN_COLOR = (0, 128/255, 0) #(nose to wrist)
 BLUE_COLOR = (255/255, 0, 0) #(eye to wrist)
+GAZE_COLOR = (255/255,255/255,0) # yellow
 
 # left eye left wrist
 # right eye right wrist
@@ -103,7 +104,7 @@ for i in range(len(ld["image"])):
     image_output['target'].append(target)
     ground = pd.DataFrame(vaid["image"][i]["ground"])
     vector = pd.DataFrame(vaid["image"][i]["vector"])
-    
+
     bad_cols = []
     for column in ground.columns:
         if point_arm not in column:
@@ -217,6 +218,18 @@ for i in range(len(ld["image"])):
 
     # plot pointing vectors
 
+    # draw gaze information (vector perpendicular to head plane, with origin from nose)
+
+    gaze_direction = vector['perpendicular_to_face'].tolist()
+    nose = lmk[lmk['landmark_name'] == 'nose'].values.flatten().tolist()[1:]
+    # vec_x = (nose[0], nose[0]+100*gaze_direction[0])
+    # vec_y = (nose[1]-offset, nose[1]+100*gaze_direction[1]-offset)
+    # vec_z = (nose[2], nose[2]+100*gaze_direction[2])
+    # ax1.plot(vec_x, vec_z, vec_y, color=GAZE_COLOR, linestyle='dashed', linewidth = 3) # without reflection
+    reflec_x = (nose[0], nose[0]-100*gaze_direction[0])
+    reflec_y = (nose[1]-offset, nose[1]-100*gaze_direction[1]+offset)
+    reflec_z = (nose[2], nose[2]-100*gaze_direction[2])
+    ax1.plot(reflec_x, reflec_z, reflec_y, color=GAZE_COLOR, linestyle='dashed', linewidth = 3) # with reflection
 
     # output target distance using different vectors
 

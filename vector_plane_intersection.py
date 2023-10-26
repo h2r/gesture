@@ -23,10 +23,13 @@ left_elbow = []
 right_elbow = []
 offsets = []
 targets = []
+mid_mouth = []
 
 NOSE = 0
 LEFT_EYE = 2
 RIGHT_EYE = 5
+LEFT_MOUTH = 9
+RIGHT_MOUTH = 10
 LEFT_SHOULDER = 11
 RIGHT_SHOULDER = 12
 LEFT_ELBOW = 13
@@ -55,11 +58,12 @@ for entry in data["image"]:
     left_elbow.append([c[LEFT_ELBOW]['x'], c[LEFT_ELBOW]['y'],c[LEFT_ELBOW]['z']])
     right_elbow.append([c[RIGHT_ELBOW]['x'], c[RIGHT_ELBOW]['y'],c[RIGHT_ELBOW]['z']])
     ground = max(c[LEFT_HEEL]['y'], c[RIGHT_HEEL]['y'], c[LEFT_FOOT_INDEX]['y'], c[RIGHT_FOOT_INDEX]['y'])
+    mid_mouth.append([(c[LEFT_MOUTH]['x']+c[RIGHT_MOUTH]['x'])/2, (c[LEFT_MOUTH]['y']+c[RIGHT_MOUTH]['y'])/2, (c[LEFT_MOUTH]['z']+c[RIGHT_MOUTH]['z'])/2])
     offsets.append(ground)
     print(names)
 
-df = pd.DataFrame(list(zip(names, nose, left_eye, right_eye, mid_eye, left_wrist, right_wrist, left_shoulder, right_shoulder, left_elbow, right_elbow, offsets)),
-               columns =['Names', 'Nose', 'Left eye', 'Right eye', 'Mid eye', 'Left wrist', 'Right wrist', 'Left shoulder', 'Right shoulder', 'Left elbow', 'Right elbow', 'Offsets'])
+df = pd.DataFrame(list(zip(names, nose, left_eye, right_eye, mid_eye, left_wrist, right_wrist, left_shoulder, right_shoulder, left_elbow, right_elbow, mid_mouth, offsets)),
+               columns =['Names', 'Nose', 'Left eye', 'Right eye', 'Mid eye', 'Left wrist', 'Right wrist', 'Left shoulder', 'Right shoulder', 'Left elbow', 'Right elbow', 'Mid mouth', 'Offsets'])
 
 THRESHOLD = math.pi/18
 
@@ -184,6 +188,16 @@ for i, row in df.iterrows():
     intersect_point_10 = plane_line_intersection(point_a10, point_b10, 0)
     vector_10 = calculate_vector(point_a10, point_b10)
 
+    # vector perpendicular to face
+    point1 = (df['Right eye'][i][0], df['Right eye'][i][1] - df['Offsets'][i], df['Right eye'][i][2]) # right eye for now
+    point2 = (df['Left eye'][i][0], df['Left eye'][i][1] - df['Offsets'][i], df['Left eye'][i][2]) # left eye for now
+    point3 = (df['Mid mouth'][i][0], df['Mid mouth'][i][1] - df['Offsets'][i], df['Mid mouth'][i][2]) # mid mouth for now
+    vector1 = np.array([point2[0] - point1[0], point2[1] - point1[1], point2[2] - point1[2]])
+    vector2 = np.array([point3[0] - point1[0], point3[1] - point1[1], point3[2] - point1[2]])
+    cross_prod = np.cross(vector1, vector2)
+    norm = math.sqrt(cross_prod[0] ** 2 + cross_prod[1] ** 2 + cross_prod[2] ** 2)
+    vector11 = [cross_prod[0] / norm, cross_prod[1] / norm, cross_prod[2] / norm]
+
     ground = {"left_eye-left_wrist": intersect_point_1[1].tolist(), 
            "right_eye-right_wrist": intersect_point_2[1].tolist(),
            "mid_eye-left_wrist": intersect_point_3[1].tolist(),
@@ -194,6 +208,7 @@ for i, row in df.iterrows():
            "right_shoulder-right_wrist": intersect_point_8[1].tolist(), 
            "left_elbow-left_wrist": intersect_point_9[1].tolist(),
            "right_elbow-right_wrist": intersect_point_10[1].tolist()}
+
     vector = {"left_eye-left_wrist": vector_1, 
            "right_eye-right_wrist": vector_2,
            "mid_eye-left_wrist": vector_3,
@@ -203,7 +218,9 @@ for i, row in df.iterrows():
            "left_shoulder-left_wrist": vector_7, 
            "right_shoulder-right_wrist": vector_8, 
            "left_elbow-left_wrist": vector_9,
-           "right_elbow-right_wrist": vector_10}
+           "right_elbow-right_wrist": vector_10,
+           "perpendicular_to_face": vector11}
+
     offset = df['Offsets'][i]
     vector_ground_data["ground"] = ground
     vector_ground_data["vector"] = vector
