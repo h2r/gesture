@@ -13,6 +13,14 @@ data = pd.read_json(script_dir+'/landmark_data.json')
 old_target_img = ["1_left_n_1", "1_left_y_1","2_left_n_1", "2_left_y_1", 
                   "3_left_n_1", "3_left_y_1", "4_left_n_1",	"4_left_y_1",	
                   "4_right_n_1"]
+
+# identify values that make sense
+ideal_image_list = ["4_right_n_3.png", "4_right_n_2.png", "1_right_y_2.png",
+                    "4_right_n_1.png", "3_right_n_1.png", "4_right_n_5.png", 
+                    "4_right_n_4.png", "4_left_n_1.png", "3_left_n_1.png",
+                    "4_left_n_2.png", "3_left_y_3.png", "2_left_y_5.png", 
+                    "4_left_y_2.png", "4_left_y_1.png", "1_left_n_4.png", 
+                    "4_right_y_5.png", "3_right_y_1.png"]
 # Target 3D location, 1-4 from left to right
 t1 = [1.05, 0, -1.02]
 t2 = [.39, 0, -.72]
@@ -58,6 +66,8 @@ RIGHT_FOOT_INDEX = 32
 for entry in data["image"]:
     name = entry['name'][0]
     # skip the image if there is no eye orientation
+    if not(name in ideal_image_list):
+       continue
     # if '_n_' in name:
     #    continue
     names.append(entry['name'][0])
@@ -109,7 +119,7 @@ def plane_line_intersection(la, lb, target_location, y_offset):
     # ground plane (y-0)
     # TODO: Change to vertical plane base on the target location
     p0 = np.array([tx,  ty+1,       tz]) # point 0 on plane
-    p1 = np.array([tx+1,ty,         tz]) # point 1 on plane
+    p1 = np.array([tx,ty,         tz+1]) # point 1 on plane
     p2 = np.array([tx,  ty,         tz]) # point 2 on plane
 
     p01 = p1-p0 # vector from point 0 to point 1
@@ -176,27 +186,28 @@ for i, row in df.iterrows():
     point_a1 = (df[eye][i][0], df[eye][i][1] - df['Offsets'][i], df[eye][i][2])
     point_b1 = (df[wrist][i][0], df[wrist][i][1] - df['Offsets'][i], df[wrist][i][2])
     intersect_point_1 = plane_line_intersection(point_a1, point_b1, df['Target'][i], 0)
-
+    print("eye:", intersect_point_1[1][1])
     # ave_eye
     point_a2 = (df['Mid eye'][i][0], df['Mid eye'][i][1] - df['Offsets'][i], df['Mid eye'][i][2])
     point_b2 = (df[wrist][i][0], df[wrist][i][1] - df['Offsets'][i], df[wrist][i][2])
     intersect_point_2 = plane_line_intersection(point_a2, point_b2, df['Target'][i], 0)
-
+    print("average eye:", intersect_point_2[1][1])
     # nose
     point_a3 = (df['Nose'][i][0], df['Nose'][i][1] - df['Offsets'][i], df['Nose'][i][2])
     point_b3 = (df[wrist][i][0], df[wrist][i][1] - df['Offsets'][i], df[wrist][i][2])
     intersect_point_3 = plane_line_intersection(point_a3, point_b3, df['Target'][i], 0)
-    
+    print("nose vector:", intersect_point_3[1][1])
     # shoulder
     point_a4 = (df[shoulder][i][0], df[shoulder][i][1] - df['Offsets'][i], df[shoulder][i][2])
     point_b4 = (df[wrist][i][0], df[wrist][i][1] - df['Offsets'][i], df[wrist][i][2])
     intersect_point_4 = plane_line_intersection(point_a4, point_b4, df['Target'][i], 0)
-   
+    print("shoulder vector:", intersect_point_4[1][1])
     #elbow
     point_a5 = (df[elbow][i][0], df[elbow][i][1] - df['Offsets'][i], df[elbow][i][2])
     point_b5 = (df[wrist][i][0], df[wrist][i][1] - df['Offsets'][i], df[wrist][i][2])
     intersect_point_5 = plane_line_intersection(point_a5, point_b5, df['Target'][i], 0)
-    
+    print("elbow vector:", intersect_point_5[1][1])
+
     eye_list.append(intersect_point_1[1][1])
     ave_eye_list.append(intersect_point_2[1][1])
     nose_list.append(intersect_point_3[1][1])
