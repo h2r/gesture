@@ -67,7 +67,7 @@ GAZE_COLOR = (255/255,255/255,0) # yellow
 # right elbow right wrist 
 color_list = {"left_eye": BLUE_COLOR, "right_eye": BLUE_COLOR, "mid_eye_left": 'm', 
 "mid_eye-right": 'm', "nose_to-left": GREEN_COLOR, "nose_to-right": GREEN_COLOR, "left_shoulder": BLACK_COLOR, 
-"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR}
+"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR, "gaze": GAZE_COLOR}
 
 vector_list = ["eye", "eyes ave.", "nose","shoulder", "elbow"]
   
@@ -144,7 +144,7 @@ for i in range(len(ld["image"])):
     # plot ground intersection & vector
     c_list = {"left_eye": BLUE_COLOR, "right_eye": BLUE_COLOR, "mid_eye_left": 'm', 
 "mid_eye-right": 'm', "nose_to-left": GREEN_COLOR, "nose_to-right": GREEN_COLOR, "left_shoulder": BLACK_COLOR, 
-"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR}
+"right_shoulder": BLACK_COLOR, "left_elbow": RED_COLOR, "right_elbow": RED_COLOR, "gaze": GAZE_COLOR}
 
     for name in ground:
         keywords = name.split("-") 
@@ -158,7 +158,6 @@ for i in range(len(ld["image"])):
             component = 'mid_eye_left'
         elif component == 'nose_to':
             component = 'nose_to-right'    
-            
         c = c_list[component]
         #v = vector_list[component]
         ax1.scatter(x, z, y, color = c, marker = 'o')
@@ -229,14 +228,15 @@ for i in range(len(ld["image"])):
     reflec_x = (nose[0], nose[0]-100*gaze_direction[0])
     reflec_y = (nose[1]-offset, nose[1]-100*gaze_direction[1]+offset)
     reflec_z = (nose[2], nose[2]-100*gaze_direction[2])
-    ax1.plot(reflec_x, reflec_z, reflec_y, color=GAZE_COLOR, linestyle='dashed', linewidth = 3) # with reflection
-
+    ax1.plot(reflec_x, reflec_z, reflec_y, color=GAZE_COLOR, linestyle='dashed', linewidth = 3, label = "gaze") # with reflection
+    
+    
     # output target distance using different vectors
 
     # Set ax1is labels
-    ax1.set_xlabel('X')
-    ax1.set_ylabel('Y')
-    ax1.set_zlabel('Z')
+    ax1.set_xlabel('X [m]')
+    ax1.set_ylabel('Y [m]')
+    ax1.set_zlabel('Z [m]')
     ax1.set_xlim(2, -2)  
     ax1.set_zlim( -1.8, 0.1)  
     ax1.set_ylim(-2, 2)  

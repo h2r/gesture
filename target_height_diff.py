@@ -111,6 +111,7 @@ def plane_line_intersection(la, lb, target_location, y_offset):
     p0 = np.array([tx,  ty+1,       tz]) # point 0 on plane
     p1 = np.array([tx+1,ty,         tz]) # point 1 on plane
     p2 = np.array([tx,  ty,         tz]) # point 2 on plane
+    print("Points:", p0, p1, p2)
 
     p01 = p1-p0 # vector from point 0 to point 1
     p02 = p2-p0 # vector from point 0 to point 2
