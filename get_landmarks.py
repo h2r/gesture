@@ -75,7 +75,7 @@ with mp_pose.Pose(
         for i in range(len(landmark_list)):
            coordinate_3D = {"landmark_name": landmark_list[i],
                             "x": lw[i].x,
-                            "y": lw[i].y,
+                            "y": -lw[i].y,
                             "z": lw[i].z}
            coordinate_2D = {"landmark_name": landmark_list[i],
                             "x": ll[i].x,

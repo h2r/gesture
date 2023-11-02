@@ -6,7 +6,7 @@ import os
 import sys
 import numpy as np
 import json
-
+import cv2
 # Get the directory of the currently running script
 script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 # Target 3D location, 1-4 from left to right
@@ -89,9 +89,10 @@ for i in range(len(ld["image"])):
     # # 3D plotting
     # fig = plt.figure()
     # ax1 = fig.add_subplot(111, projection='3d')
-    fig1 = plt.figure(figsize=(7, 5))
+    fig1 = plt.figure(figsize=(5, 8))
     # fig2 = plt.figure(figsize=(10, 5))
-    ax1 = fig1.add_subplot(111, projection='3d')
+    ax1 = fig1.add_subplot(212, projection='3d')
+    ax2 = fig1.add_subplot(211)
     # Get body coornidates for all joints
     lmk = pd.DataFrame(img["landmark_3D"])
     img_name = img["name"][0]
@@ -234,11 +235,11 @@ for i in range(len(ld["image"])):
     # output target distance using different vectors
 
     # Set ax1is labels
-    ax1.set_xlabel('X [m]')
-    ax1.set_ylabel('Y [m]')
-    ax1.set_zlabel('Z [m]')
-    ax1.set_xlim(2, -2)  
-    ax1.set_zlim( -1.8, 0.1)  
+    ax1.set_xlabel('X')
+    ax1.set_ylabel('Z')
+    ax1.set_zlabel('Y')
+    ax1.set_xlim(-2, 2)  
+    ax1.set_zlim( -0.1, 1.8)  
     ax1.set_ylim(-2, 2)  
     # # Make the ax1is planes solid gray
     # ax1.w_xaxis.pane.fill = True  # Disable filling the x-ax1is plane
@@ -246,7 +247,7 @@ for i in range(len(ld["image"])):
     # ax1.w_zaxis.pane.fill = True  # Disable filling the z-ax1is plane
 
     # Set the view to have y as vertical and z pointing out
-    ax1.view_init(elev=-165, azim=65)
+    ax1.view_init(azim=-50, elev=20)
 
     # Set plot title
     ax1.set_title('3D Plot of %s'%img_name)
@@ -309,7 +310,8 @@ for i in range(len(ld["image"])):
     image_output['y_diff'] = y_values
     image_output['dist'] = dist_values
     print(image_output)
-        
+    img = cv2.imread(script_dir+'/data/'+img_name)
+    ax2.imshow(cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
     # ax2.set_title("x-y plane visualization")
     # ax2.set_xlabel("X")
     # ax2.set_ylabel("Y")
